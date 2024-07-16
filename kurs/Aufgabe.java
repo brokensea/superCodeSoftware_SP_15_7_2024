@@ -4,18 +4,23 @@ import java.time.LocalDate;
 
 public class Aufgabe {
     private int aufgabeID;
+    private static int nextId;
     private String beschreiben;
     private LocalDate dauern;
 
-    public Aufgabe(int aufgabeID, String beschreiben, LocalDate dauern) {
-        this.aufgabeID = aufgabeID;
+    public Aufgabe(String beschreiben, LocalDate dauern) {
+        this.aufgabeID = this.generateUniqueId();
         this.beschreiben = beschreiben;
         this.dauern = dauern;
     }
 
-    // public int getAufgabeID() {
-    //     return aufgabeID;
-    // }
+    private synchronized int generateUniqueId() {
+        return nextId++;
+    }
+
+    public int getAufgabeID() {
+        return aufgabeID;
+    }
 
     public void setAufgabeID(int aufgabeID) {
         this.aufgabeID = aufgabeID;
