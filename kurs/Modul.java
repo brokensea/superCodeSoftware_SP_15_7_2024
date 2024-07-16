@@ -17,6 +17,8 @@ public class Modul {
     private ArrayList<Aufgabe> aufgabenList;
     private ArrayList<Mitarbeiter> trainierList;
 
+    
+
     public Modul(LocalDate startDatum, LocalDate endDatum,  boolean lizenzen,
             ModulName modulType, ArrayList<Aufgabe> aufgabenList, ArrayList<Mitarbeiter> trainierList) {
 
