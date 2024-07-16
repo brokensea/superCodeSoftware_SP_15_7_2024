@@ -2,8 +2,6 @@ package person;
 
 import java.time.LocalDate;
 
-import javax.xml.crypto.Data;
-
 import kurs.Kurs;
 
 public class Teilnehmer extends Person {
