@@ -104,7 +104,6 @@ public class Modul {
 
     public Aufgabe pruefenTagMindsterAufgabe() {
         Aufgabe minTagAufgabe = this.aufgabenList.get(0);
-       //int comparison = date1.compareTo(date2);
         for (Aufgabe aufgabe : aufgabenList) {
             if(minTagAufgabe.getDauern().compareTo(aufgabe.getDauern()) == 1) {
                 minTagAufgabe = aufgabe;
