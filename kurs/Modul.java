@@ -17,13 +17,8 @@ public class Modul {
     private ArrayList<Aufgabe> aufgabenList;
     private ArrayList<Mitarbeiter> trainierList;
 
-<<<<<<< HEAD
-    
 
-    public Modul(LocalDate startDatum, LocalDate endDatum,  boolean lizenzen,
-=======
     public Modul(LocalDate startDatum, LocalDate endDatum, boolean lizenzen,
->>>>>>> main
             ModulName modulType, ArrayList<Aufgabe> aufgabenList, ArrayList<Mitarbeiter> trainierList) {
 
         Period period = Period.between(startDatum, endDatum);
