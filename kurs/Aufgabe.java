@@ -8,14 +8,9 @@ public class Aufgabe {
     private String beschreiben;
     private LocalDate dauern;
 
-<<<<<<< HEAD
 
-    public Aufgabe(int aufgabeID, String beschreiben, LocalDate dauern) {
-        this.aufgabeID = aufgabeID;
-=======
     public Aufgabe(String beschreiben, LocalDate dauern) {
         this.aufgabeID = this.generateUniqueId();
->>>>>>> 8b3efb7e4f82d610d6003fac5d54aa0f5e3b0904
         this.beschreiben = beschreiben;
         this.dauern = dauern;
     }
