@@ -7,6 +7,7 @@ public class Aufgabe {
     private String beschreiben;
     private LocalDate dauern;
 
+
     public Aufgabe(int aufgabeID, String beschreiben, LocalDate dauern) {
         this.aufgabeID = aufgabeID;
         this.beschreiben = beschreiben;
