@@ -1,6 +1,7 @@
 package kurs;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import person.*;
 import enumKlass.Bewertung;
@@ -16,21 +17,19 @@ public class Kurs {
     private int tageAnzahl;
     private ArrayList<Teilnehmer> teilNehmerList;
     private ArrayList<Mitarbeiter> mitarbeiterList;
-    private ArrayList<Bewertung> bewertList;
-    private ArrayList<String> rueckmeldungList;
     private ArrayList<Module> modulList;
 
-    public Kurs(String kursName, LocalDate startDatum, LocalDate endDatum, int tageAnzahl,
+    public Kurs(String kursName, LocalDate startDatum, LocalDate endDatum,
             ArrayList<Teilnehmer> teilNehmerList, ArrayList<Mitarbeiter> mitarbeiterList,
-            ArrayList<Bewertung> bewertList, ArrayList<String> rueckmeldungList, ArrayList<Module> modulList) {
+            ArrayList<String> rueckmeldungList, ArrayList<Module> modulList) {
+
+        Period period = Period.between(startDatum, endDatum);
+        this.tageAnzahl = period.getDays();
         this.kursName = kursName;
         this.startDatum = startDatum;
         this.endDatum = endDatum;
-        this.tageAnzahl = tageAnzahl;
         this.teilNehmerList = teilNehmerList;
         this.mitarbeiterList = mitarbeiterList;
-        this.bewertList = bewertList;
-        this.rueckmeldungList = rueckmeldungList;
         this.modulList = modulList;
         this.kursId = this.generateUniqueId();
     }
@@ -87,28 +86,42 @@ public class Kurs {
         this.mitarbeiterList = mitarbeiterList;
     }
 
-    public ArrayList<Bewertung> getBewertList() {
-        return bewertList;
-    }
-
-    public void setBewertList(ArrayList<Bewertung> bewertList) {
-        this.bewertList = bewertList;
-    }
-
-    public ArrayList<String> getRueckmeldungList() {
-        return rueckmeldungList;
-    }
-
-    public void setRueckmeldungList(ArrayList<String> rueckmeldungList) {
-        this.rueckmeldungList = rueckmeldungList;
-    }
-
     public ArrayList<Module> getModulList() {
         return modulList;
     }
 
     public void setModulList(ArrayList<Module> modulList) {
         this.modulList = modulList;
+    }
+
+    // Methode:
+    // ein Kurs maxmal 8 Teilnehmern
+    private boolean pruefenAnzahlTeilnehmerNichtZuViel() {
+        if (this.getTeilNehmerList().size() > 8)
+            return false;
+        else {
+            return true;
+        }
+    }
+
+    // rechnen durchschnittliche Bewerbung von TeilnehmerList ein gut oder .. Note
+    private Bewertung bewertenRechnen() {
+        int note;
+        int sum = 0;
+        for (Teilnehmer teilnehmer : this.teilNehmerList) {
+            sum += teilnehmer.getBewertungKurs().getNote();
+        }
+        note = (int) (sum / this.teilNehmerList.size());
+
+        Bewertung bewertung = Bewertung.getByNote(note);
+        return bewertung;
+    }
+
+    // print alle Beschreibung von Teilnehmern
+    private void lesenRueckmeidungList() {
+        for (Teilnehmer teilnehmer : this.teilNehmerList) {
+            System.out.println(teilnehmer.getRueckmeldung());
+        }
     }
 
 }
