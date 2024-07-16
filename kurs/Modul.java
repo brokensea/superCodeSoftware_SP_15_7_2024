@@ -1,6 +1,8 @@
 package kurs;
 
+import java.lang.reflect.Method;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 import enumKlass.ModulName;
@@ -15,12 +17,13 @@ public class Modul {
     private ArrayList<Aufgabe> aufgabenList;
     private ArrayList<Mitarbeiter> trainierList;
 
-    public Modul(LocalDate startDatum, LocalDate endDatum, int tageAnzahl, boolean lizenzen,
+    public Modul(LocalDate startDatum, LocalDate endDatum, boolean lizenzen,
             ModulName modulType, ArrayList<Aufgabe> aufgabenList, ArrayList<Mitarbeiter> trainierList) {
 
+        Period period = Period.between(startDatum, endDatum);
+        this.tageAnzahl = period.getDays();
         this.startDatum = startDatum;
         this.endDatum = endDatum;
-        this.tageAnzahl = tageAnzahl;
         this.lizenzen = lizenzen;
         this.modulType = modulType;
         this.aufgabenList = aufgabenList;
@@ -89,5 +92,30 @@ public class Modul {
 
     public void setTrainierList(ArrayList<Mitarbeiter> trainierList) {
         this.trainierList = trainierList;
+    }
+
+    public boolean hasLizenz(Mitarbeiter mitarbeiter) {
+        return mitarbeiter.getLizenzenList().contains(this);
+    }
+
+    public void addAufgabe(Aufgabe aufgabe) {
+        this.aufgabenList.add(aufgabe);
+    }
+    // Method
+
+    public Aufgabe pruefenTagMindsterAufgabe() {
+        Aufgabe minTagAufgabe = this.aufgabenList.get(0);
+        for (Aufgabe aufgabe : aufgabenList) {
+            if (minTagAufgabe.getDauern().compareTo(aufgabe.getDauern()) == 1) {
+                minTagAufgabe = aufgabe;
+            }
+        }
+        return minTagAufgabe;
+    }
+
+    // später
+    // Ein Modul nicht viel Mitabeiter
+    private boolean pruefenObTrainerWechselZuviel() {
+        return false;
     }
 }
