@@ -21,4 +21,14 @@ public enum Bewertung {
     public String toString() {
         return name() + ": note = " + note;
     }
+
+    public static Bewertung getByNote(int note) {
+        for (Bewertung bewertung : Bewertung.values()) {
+            if (bewertung.getNote() == note) {
+                return bewertung;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant found for note: " + note);
+    }
+
 }
