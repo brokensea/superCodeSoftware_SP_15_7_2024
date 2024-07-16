@@ -1,4 +1,4 @@
-package kurs;
+package superCodeSoftware_SP_15_7_2024;
 
 import java.time.LocalDate;
 
@@ -13,28 +13,33 @@ public class Aufgabe {
         this.dauern = dauern;
     }
 
-    // public int getAufgabeID() {
-    //     return aufgabeID;
-    // }
+ 
+    public int getAufgabeID() {
+        return aufgabeID;
+    }
 
+   
     public void setAufgabeID(int aufgabeID) {
         this.aufgabeID = aufgabeID;
     }
 
+    
     public String getBeschreiben() {
         return beschreiben;
     }
+
 
     public void setBeschreiben(String beschreiben) {
         this.beschreiben = beschreiben;
     }
 
+
     public LocalDate getDauern() {
         return dauern;
     }
 
+
     public void setDauern(LocalDate dauern) {
         this.dauern = dauern;
     }
-
 }
