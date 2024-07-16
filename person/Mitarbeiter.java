@@ -60,6 +60,10 @@ public class Mitarbeiter extends Person {
         return true;
     }
 
+    public  void addModul(Modul modul) {
+        modulList.add(modul);
+    }
+
     @Override
     public String toString() {
         return "Mitarbeiter{" +
