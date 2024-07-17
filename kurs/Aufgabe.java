@@ -8,6 +8,7 @@ public class Aufgabe {
     private String beschreiben;
     private LocalDate dauern;
 
+
     public Aufgabe(String beschreiben, LocalDate dauern) {
         this.aufgabeID = this.generateUniqueId();
         this.beschreiben = beschreiben;
