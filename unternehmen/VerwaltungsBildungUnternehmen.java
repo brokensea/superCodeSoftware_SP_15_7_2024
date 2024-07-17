@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import kurs.Modul;
 import kurs.Kurs;
+import kurs.Aufgabe;
 import person.Mitarbeiter;
 import person.Teilnehmer;
 
@@ -16,6 +17,7 @@ public class VerwaltungsBildungUnternehmen {
     private LocalDate begruendungsdatum;
     private String kategorie;
     private ArrayList<Kurs> kursList;
+    private ArrayList<Aufgabe> aufgabenpool;
 
     ArrayList<Mitarbeiter> mitarbeiterList;
     private ArrayList<Teilnehmer> teilnehmenList;

@@ -1,8 +1,10 @@
 package kurs;
 
 import java.lang.reflect.Method;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import enumKlass.ModulName;
@@ -14,20 +16,17 @@ public class Modul {
     private int tageAnzahl;
     private ModulName modulType;
     private ArrayList<Aufgabe> aufgabenList;//  ohne aufgabenList mit kategorie (wie viel tagen und vie viel aufgaben?)
-    private ArrayList<Mitarbeiter> trainierList;
+    private Mitarbeiter trainier;
 
     public Modul(LocalDate startDatum, LocalDate endDatum,
             ModulName modulType, ArrayList<Aufgabe> aufgabenList) {
-
-        // ArrayList<Mitarbeiter> trainierList
-
-        Period period = Period.between(startDatum, endDatum);// period ohne wochenende
-        this.tageAnzahl = period.getDays();
+        isWeekend(startDatum);
+        isWeekend(endDatum);
+        this.tageAnzahl = calculateWeekdaysBetween(startDatum, endDatum);
         this.startDatum = startDatum;
         this.endDatum = endDatum;
         this.modulType = modulType;
         this.aufgabenList = aufgabenList;
-        this.trainierList = new ArrayList<>();
         // this.trainierList = trainierList;
     }
 
@@ -79,13 +78,7 @@ public class Modul {
         this.aufgabenList = aufgabenList;
     }
 
-    public ArrayList<Mitarbeiter> getTrainierList() {
-        return trainierList;
-    }
-
-    public void setTrainierList(ArrayList<Mitarbeiter> trainierList) {
-        this.trainierList = trainierList;
-    }
+   
 
     public boolean hasLizenz(Mitarbeiter mitarbeiter) {
         return mitarbeiter.getLizenzenList().contains(this);
@@ -96,7 +89,7 @@ public class Modul {
     }
 
     public void addMitarbeiter(Mitarbeiter mitarbeiter) {
-        this.trainierList.add(mitarbeiter);
+        this.trainier = mitarbeiter;
     }
     // Method
 
@@ -110,13 +103,31 @@ public class Modul {
         return minTagAufgabe;
     }
 
-    private boolean pruefenObTrainerWechselZuviel() {
-        if (trainierList.size() < 3) {
-            return true;
-        } else {
-            return false;
+    public boolean isWeekend(LocalDate date) {
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+            throw new IllegalArgumentException(date + " is a weekend.");
         }
+
+        return false;
     }
+
+    public static int calculateWeekdaysBetween(LocalDate startDatum, LocalDate endDatum) {
+        
+        long totalDays = ChronoUnit.DAYS.between(startDatum, endDatum);
+        long weekdays = 0;
+
+        for (long i = 0; i <= totalDays; i++) {
+            LocalDate currentDate = startDatum.plusDays(i);
+            DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
+            if (dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY) {
+                weekdays++;
+            }
+        }
+
+        return (int)weekdays;
+    }
+   
 
     @Override
     public String toString() {
@@ -126,7 +137,7 @@ public class Modul {
                 ", tageAnzahl=" + tageAnzahl +
                 ", modulType=" + modulType +
                 ", aufgabenList=" + aufgabenList +
-                ", trainierList=" + trainierList +
+                ", trainier=" + trainier +
                 '}';
     }
 }
