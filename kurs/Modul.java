@@ -12,23 +12,23 @@ public class Modul {
     private LocalDate startDatum;
     private LocalDate endDatum;
     private int tageAnzahl;
-    private boolean lizenzen;
     private ModulName modulType;
     private ArrayList<Aufgabe> aufgabenList;//  ohne aufgabenList mit kategorie (wie viel tagen und vie viel aufgaben?)
     private ArrayList<Mitarbeiter> trainierList;
 
+    public Modul(LocalDate startDatum, LocalDate endDatum,
+            ModulName modulType, ArrayList<Aufgabe> aufgabenList) {
 
-    public Modul(LocalDate startDatum, LocalDate endDatum, boolean lizenzen,
-            ModulName modulType, ArrayList<Aufgabe> aufgabenList, ArrayList<Mitarbeiter> trainierList) {
+        // ArrayList<Mitarbeiter> trainierList
 
         Period period = Period.between(startDatum, endDatum);// period ohne wochenende
         this.tageAnzahl = period.getDays();
         this.startDatum = startDatum;
         this.endDatum = endDatum;
-        this.lizenzen = lizenzen;
         this.modulType = modulType;
         this.aufgabenList = aufgabenList;
-        this.trainierList = trainierList;
+        this.trainierList = new ArrayList<>();
+        // this.trainierList = trainierList;
     }
 
     public ModulName getModulName() {
@@ -63,14 +63,6 @@ public class Modul {
         this.tageAnzahl = tageAnzahl;
     }
 
-    public boolean isLizenzen() {
-        return lizenzen;
-    }
-
-    public void setLizenzen(boolean lizenzen) {
-        this.lizenzen = lizenzen;
-    }
-
     public ModulName getModulType() {
         return modulType;
     }
@@ -102,21 +94,39 @@ public class Modul {
     public void addAufgabe(Aufgabe aufgabe) {
         this.aufgabenList.add(aufgabe);
     }
+
+    public void addMitarbeiter(Mitarbeiter mitarbeiter) {
+        this.trainierList.add(mitarbeiter);
+    }
     // Method
 
     public Aufgabe pruefenTagMindsterAufgabe() {
         Aufgabe minTagAufgabe = this.aufgabenList.get(0);
         for (Aufgabe aufgabe : aufgabenList) {
-            if (minTagAufgabe.getDauern().compareTo(aufgabe.getDauern()) == 1) {
+            if (minTagAufgabe.getDauern() > aufgabe.getDauern()) {
                 minTagAufgabe = aufgabe;
             }
         }
         return minTagAufgabe;
     }
 
-    // später
-    // Ein Modul nicht viel Mitabeiter
     private boolean pruefenObTrainerWechselZuviel() {
-        return false;
+        if (trainierList.size() < 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Modul{" +
+                "startDatum=" + startDatum +
+                ", endDatum=" + endDatum +
+                ", tageAnzahl=" + tageAnzahl +
+                ", modulType=" + modulType +
+                ", aufgabenList=" + aufgabenList +
+                ", trainierList=" + trainierList +
+                '}';
     }
 }
