@@ -36,6 +36,21 @@ public class MainTest {
     // Main test
     public static void main(String[] args) {
         // personTest();
+
+        // kursTest()
+
+        // unternehmenTest()
+
+        // später
+        // 1. Ein Modul nicht viel Mitabeiter()
+        // hier muss auch machen
+        // 2. Periode muss ohne Wochenend Sam Sonnt
+        // 3. private ArrayList<Aufgabe> aufgabenList; Aufgaben pool in
+        // VerwaltungsBildungUnternehmen
+        // 4. private ModulName aufgabeType; in Aufgabe
+        // wenn aufgabe gleicht Type von Modul dann darf hinzufügen
+        // 5.
+        //
     }
 
     public static void personTest() {
