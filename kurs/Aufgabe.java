@@ -10,12 +10,17 @@ public class Aufgabe {
     private String beschreiben;
     private int dauern;
 
+    private ModulName modulname;
+
     // private ModulName aufgabeType;
 
-    public Aufgabe(String beschreiben, int dauern) {
+    
+
+    public Aufgabe(String beschreiben, int dauern, ModulName modulname) {
         this.aufgabeID = this.generateUniqueId();
         this.beschreiben = beschreiben;
         this.dauern = dauern;
+        this.modulname = modulname;
     }
 
     private synchronized int generateUniqueId() {
@@ -44,6 +49,14 @@ public class Aufgabe {
 
     public void setDauern(int dauern) {
         this.dauern = dauern;
+    }
+
+    public ModulName getModulname() {
+        return modulname;
+    }
+
+    public void setModulname(ModulName modulname) {
+        this.modulname = modulname;
     }
 
     public String toString() {
