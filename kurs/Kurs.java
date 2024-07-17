@@ -21,13 +21,12 @@ public class Kurs {
     private ArrayList<String> rueckmeldungList;
 
     public Kurs(String kursName, LocalDate startDatum, LocalDate endDatum) {
-
+        // rechnen Tagen
         Period period = Period.between(startDatum, endDatum);
         this.tageAnzahl = period.getDays();
         this.kursName = kursName;
         this.startDatum = startDatum;
         this.endDatum = endDatum;
-        //
         this.teilNehmerList = new ArrayList<>();
         this.mitarbeiterList = new ArrayList<>();
         this.modulList = new ArrayList<>();
@@ -35,8 +34,22 @@ public class Kurs {
         this.kursId = this.generateUniqueId();
     }
 
-    private synchronized int generateUniqueId() {
-        return nextId++;
+    // get and set
+
+    public int getKursId() {
+        return kursId;
+    }
+
+    public void setKursId(int kursId) {
+        this.kursId = kursId;
+    }
+
+    public static int getNextId() {
+        return nextId;
+    }
+
+    public static void setNextId(int nextId) {
+        Kurs.nextId = nextId;
     }
 
     public String getKursName() {
@@ -95,50 +108,78 @@ public class Kurs {
         this.modulList = modulList;
     }
 
-    // Methode:
-    // ein Kurs maxmal 8 Teilnehmern
-    public boolean pruefenAnzahlTeilnehmerNichtZuViel() {
-        if (this.getTeilNehmerList().size() > 8)
-            return false;
-        else {
-            return true;
-        }
+    public ArrayList<String> getRueckmeldungList() {
+        return rueckmeldungList;
     }
 
-    // rechnen durchschnittliche Bewerbung von TeilnehmerList ein gut oder .. Note
+    public void setRueckmeldungList(ArrayList<String> rueckmeldungList) {
+        this.rueckmeldungList = rueckmeldungList;
+    }
+
+    private synchronized int generateUniqueId() {
+        return nextId++;
+    }
+
+    // prufen ob mehr als 8
+    public boolean pruefenAnzahlTeilnehmerNichtZuViel() {
+        return this.getTeilNehmerList().size() <= 8;
+    }
+
+    // Bewertung von Kurs rechnen
     public Bewertung bewertenRechnen() {
-        int note;
         int sum = 0;
         for (Teilnehmer teilnehmer : this.teilNehmerList) {
             sum += teilnehmer.getBewertungKurs().getNote();
         }
-        note = (int) (sum / this.teilNehmerList.size());
-
-        Bewertung bewertung = Bewertung.getByNote(note);
-        return bewertung;
+        if (this.teilNehmerList.size() > 0) {
+            int note = sum / this.teilNehmerList.size();
+            Bewertung bewertung = Bewertung.getByNote(note);
+            return bewertung;
+        } else {
+            return Bewertung.UNBEKANNT; // UNBEKANNT ist auch bewerten
+        }
     }
 
+    // add TeilNehmer zu Kurs
     public void addTeilNehmer(Teilnehmer teilnehmer) {
         this.teilNehmerList.add(teilnehmer);
     }
 
+    // add Mitarbeiter zu Kurs
     public void addMitarbeiter(Mitarbeiter mitarbeiter) {
         this.mitarbeiterList.add(mitarbeiter);
     }
 
+    // add Modul zu Kurs
     public void addModul(Modul modul) {
         this.modulList.add(modul);
     }
 
-    public void addRueckmeldungList(String ruckmeldung) {
-        this.rueckmeldungList.add(ruckmeldung);
+    // add feedback zu Kurs
+    public void addRueckmeldungList(String rueckmeldung) {
+        this.rueckmeldungList.add(rueckmeldung);
     }
 
-    // print alle Beschreibung von Teilnehmern
-    public void lesenRueckmeidungList() {
-        for (Teilnehmer teilnehmer : this.teilNehmerList) {
-            System.out.println(teilnehmer.getRueckmeldung());
+    // Kurs Information auszudrücken
+    public void lesenRueckmeldungList() {
+        for (String rueckmeldung : this.rueckmeldungList) {
+            System.out.println(rueckmeldung);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Kurs{" +
+                "kursId=" + kursId +
+                ", kursName='" + kursName + '\'' +
+                ", startDatum=" + startDatum +
+                ", endDatum=" + endDatum +
+                ", tageAnzahl=" + tageAnzahl +
+                ", teilNehmerList=" + teilNehmerList +
+                ", mitarbeiterList=" + mitarbeiterList +
+                ", modulList=" + modulList +
+                ", rueckmeldungList=" + rueckmeldungList +
+                '}';
     }
 
 }

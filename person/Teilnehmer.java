@@ -6,7 +6,6 @@ import kurs.Kurs;
 import enumKlass.Bewertung;
 
 public class Teilnehmer extends Person {
-
     private boolean hatArbeit;
     private String unternehmer;
     private Kurs kurs;
@@ -14,29 +13,19 @@ public class Teilnehmer extends Person {
     private Bewertung bewertungKurs;
     private String rueckmeldung;
 
-    public Teilnehmer(String vorname, String nachname, String address, String unternehmer, boolean hatArbeit,
-            LocalDate arbeitgefundenZeit,
-            Kurs kurs, Bewertung bewertungKurs, String rueckmeldung) {
+    public Teilnehmer(String vorname, String nachname, String address) {
         super(vorname, nachname, address);
-
-        this.setHatArbeit(hatArbeit);
-        this.setUnternehmer(unternehmer);
-        this.setArbeitgefundenZeit(arbeitgefundenZeit);
-        this.setKurs(kurs);
-        this.setBewertungKurs(bewertungKurs);
-        this.setRueckmeldung(rueckmeldung);
+        this.hatArbeit = false;
+        this.unternehmer = "kein Unternehmer";
+        this.arbeitgefundenZeit = LocalDate.of(0, 1, 1); // Set to a default date, e.g., 0000-01-01
     }
 
-    public Teilnehmer(String vorname, String nachname, String address,
-            Kurs kurs, Bewertung bewertungKurs, String rueckmeldung) {
-        super(vorname, nachname, address);
-
-        this.setHatArbeit(false);
-        this.setUnternehmer("kein Unternehmer");
-        this.setArbeitgefundenZeit(LocalDate.of(0, 0, 0));
-        this.setKurs(kurs);
-        this.setBewertungKurs(bewertungKurs);
-        this.setRueckmeldung(rueckmeldung);
+    public Teilnehmer(String vorname, String nachname, String address, Kurs kurs, Bewertung bewertungKurs,
+            String rueckmeldung) {
+        this(vorname, nachname, address); // Call the default constructor to set default values
+        this.kurs = kurs;
+        this.bewertungKurs = bewertungKurs;
+        this.rueckmeldung = rueckmeldung;
     }
 
     public String getRueckmeldung() {

@@ -16,7 +16,6 @@ public class Modul {
     private int tageAnzahl;
     private ModulName modulName;
     private ArrayList<Aufgabe> aufgabenList;
-    // ohne aufgabenList mit kategorie (wie viel tagen und vie viel aufgaben?)
     private Mitarbeiter trainier;
 
     public Modul(LocalDate startDatum, LocalDate endDatum,

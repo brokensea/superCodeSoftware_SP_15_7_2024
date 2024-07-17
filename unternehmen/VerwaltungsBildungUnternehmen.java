@@ -28,6 +28,10 @@ public class VerwaltungsBildungUnternehmen {
 
     public VerwaltungsBildungUnternehmen(String unternehmen) {
         this.unternehmen = unternehmen;
+        this.kursList = new ArrayList<>();
+        this.aufgabenpool = new ArrayList<>();
+        this.mitarbeiterList = new ArrayList<>();
+        this.teilnehmenList = new ArrayList<>();
     }
 
     public int rechnenDurchsnittlichArbeitFindenZeit(Kurs kurs) {
@@ -116,7 +120,9 @@ public class VerwaltungsBildungUnternehmen {
                 if (lizenzen == modul.getModulName()) {
                     maxPassendMitarbeiter.addModul(modul);
                 } else {
-                    System.out.println("Mitabeiter " + maxPassendMitarbeiter + " hat kein Lizenzen von" + modul);
+                    System.out.println(
+                            "Mitabeiter " + maxPassendMitarbeiter.getVorname() + " hat kein Lizenzen von: "
+                                    + modul.getModulName());
                 }
             }
         }

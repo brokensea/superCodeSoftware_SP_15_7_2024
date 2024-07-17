@@ -16,19 +16,26 @@ public class Mitarbeiter extends Person {
 
     public Mitarbeiter(String vorname, String nachname, String address) {
         super(vorname, nachname, address);
-        // this.setLizenzenList(lizenzenList);
-        this.setModulList(modulList);
+        this.lizenzenList = new ArrayList<>();
+        this.modulList = new ArrayList<>();
         this.mitarbeiter_id = this.generateUniqueId();
-        ArrayList<Modul> modulList = new ArrayList<>();
-        ArrayList<ModulName> lizenzenList = new ArrayList<>();
     }
 
+    // get und set
     public int getMitarbeiter_id() {
         return mitarbeiter_id;
     }
 
     public void setMitarbeiter_id(int mitarbeiter_id) {
         this.mitarbeiter_id = mitarbeiter_id;
+    }
+
+    public static int getNextId() {
+        return nextId;
+    }
+
+    public static void setNextId(int nextId) {
+        Mitarbeiter.nextId = nextId;
     }
 
     public ArrayList<ModulName> getLizenzenList() {
@@ -51,14 +58,15 @@ public class Mitarbeiter extends Person {
         return nextId++;
     }
 
+    // prufen ob Mitarbeiter frei
     public boolean istFrei(LocalDate date) {
         for (Modul modul : this.getModulList()) {
             if (date.isAfter(modul.getStartDatum()) && date.isBefore(modul.getEndDatum())) {
-                System.out.println(this.getVorname() + "ist nicht frei");
+                System.out.println(this.getVorname() + " ist nicht frei");
                 return false;
             }
         }
-        System.out.println(this.getVorname() + "ist frei");
+        System.out.println(this.getVorname() + " ist frei");
         return true;
     }
 
@@ -77,8 +85,7 @@ public class Mitarbeiter extends Person {
                 ", vorname='" + getVorname() + '\'' +
                 ", nachname='" + getNachname() + '\'' +
                 ", address='" + getAddress() + '\'' +
-                // ", lizenzenList=" + lizenzenList +
-                // ", modulList=" + modulList +
                 '}';
     }
+
 }

@@ -5,7 +5,8 @@ public enum Bewertung {
     GUT(4),
     ZUFRIEDEN(3),
     NICHT_ZUFRIEDEN(2),
-    SCHLECHT(1);
+    SCHLECHT(1),
+    UNBEKANNT(1);
 
     private final int note;
 
