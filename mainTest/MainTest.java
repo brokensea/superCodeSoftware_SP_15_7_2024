@@ -13,9 +13,9 @@ import kurs.*;
 public class MainTest {
 
     // set up AufgabeList
-    private static Aufgabe aufgabe_1 = new Aufgabe("java OOP Übung", 1);
-    private static Aufgabe aufgabe_2 = new Aufgabe("java OOP2 Vertiefung", 2);
-    private static Aufgabe aufgabe_3 = new Aufgabe("java OOP3 Vertiefung", 3);
+    // private static Aufgabe aufgabe_1 = new Aufgabe("java OOP Übung", 1);
+    // private static Aufgabe aufgabe_2 = new Aufgabe("java OOP2 Vertiefung", 2);
+    // private static Aufgabe aufgabe_3 = new Aufgabe("java OOP3 Vertiefung", 3);
     private static ArrayList<Aufgabe> aufgabeList = new ArrayList<>(Arrays.asList(aufgabe_1, aufgabe_2, aufgabe_3));
 
     // set up ModulList
