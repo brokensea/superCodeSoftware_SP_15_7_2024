@@ -111,7 +111,15 @@ public class Modul {
     }
 
     // später
-    // Ein Modul nicht viel Mitabeiter
+    // 1. Ein Modul nicht viel Mitabeiter()
+    // hier muss auch machen
+    // 2. Periode muss ohne Wochenend Sam Sonnt
+    // 3. private ArrayList<Aufgabe> aufgabenList; Aufgaben pool in
+    // VerwaltungsBildungUnternehmen
+    // 4. private ModulName aufgabeType; in Aufgabe
+    // wenn aufgabe gleicht Type von Modul dann darf hinzufügen
+    // 5.
+    //
     private boolean pruefenObTrainerWechselZuviel() {
         if (trainierList.size() < 3) {
             return true;

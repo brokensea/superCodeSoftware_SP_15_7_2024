@@ -20,6 +20,9 @@ public class VerwaltungsBildungUnternehmen {
     ArrayList<Mitarbeiter> mitarbeiterList;
     private ArrayList<Teilnehmer> teilnehmenList;
 
+    // private ArrayList<Aufgabe> aufgabenList;
+    // Aufgaben pool
+
     public int rechnenDurchsnittlichArbeitFindenZeit(Kurs kurs) {
         int durchsnittlichTage;
         int sum = 0;
