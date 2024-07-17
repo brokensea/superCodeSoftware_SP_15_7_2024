@@ -14,28 +14,29 @@ public class Modul {
     private LocalDate startDatum;
     private LocalDate endDatum;
     private int tageAnzahl;
-    private ModulName modulType;
-    private ArrayList<Aufgabe> aufgabenList;//  ohne aufgabenList mit kategorie (wie viel tagen und vie viel aufgaben?)
+    private ModulName modulName;
+    private ArrayList<Aufgabe> aufgabenList;
+    // ohne aufgabenList mit kategorie (wie viel tagen und vie viel aufgaben?)
     private Mitarbeiter trainier;
 
     public Modul(LocalDate startDatum, LocalDate endDatum,
-            ModulName modulType, ArrayList<Aufgabe> aufgabenList) {
+            ModulName modulName, ArrayList<Aufgabe> aufgabenList) {
         isWeekend(startDatum);
         isWeekend(endDatum);
         this.tageAnzahl = calculateWeekdaysBetween(startDatum, endDatum);
         this.startDatum = startDatum;
         this.endDatum = endDatum;
-        this.modulType = modulType;
+        this.modulName = modulName;
         this.aufgabenList = aufgabenList;
         // this.trainierList = trainierList;
     }
 
     public ModulName getModulName() {
-        return modulType;
+        return modulName;
     }
 
-    public void setModulName(ModulName modulType) {
-        this.modulType = modulType;
+    public void setModulName(ModulName modulName) {
+        this.modulName = modulName;
     }
 
     public LocalDate getStartDatum() {
@@ -62,14 +63,6 @@ public class Modul {
         this.tageAnzahl = tageAnzahl;
     }
 
-    public ModulName getModulType() {
-        return modulType;
-    }
-
-    public void setModulType(ModulName modulType) {
-        this.modulType = modulType;
-    }
-
     public ArrayList<Aufgabe> getAufgabenList() {
         return aufgabenList;
     }
@@ -77,8 +70,6 @@ public class Modul {
     public void setAufgabenList(ArrayList<Aufgabe> aufgabenList) {
         this.aufgabenList = aufgabenList;
     }
-
-   
 
     public boolean hasLizenz(Mitarbeiter mitarbeiter) {
         return mitarbeiter.getLizenzenList().contains(this);
@@ -113,7 +104,7 @@ public class Modul {
     }
 
     public static int calculateWeekdaysBetween(LocalDate startDatum, LocalDate endDatum) {
-        
+
         long totalDays = ChronoUnit.DAYS.between(startDatum, endDatum);
         long weekdays = 0;
 
@@ -125,9 +116,8 @@ public class Modul {
             }
         }
 
-        return (int)weekdays;
+        return (int) weekdays;
     }
-   
 
     @Override
     public String toString() {
@@ -135,7 +125,7 @@ public class Modul {
                 "startDatum=" + startDatum +
                 ", endDatum=" + endDatum +
                 ", tageAnzahl=" + tageAnzahl +
-                ", modulType=" + modulType +
+                ", modulType=" + modulName +
                 ", aufgabenList=" + aufgabenList +
                 ", trainier=" + trainier +
                 '}';

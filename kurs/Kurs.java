@@ -17,20 +17,21 @@ public class Kurs {
     private int tageAnzahl;
     private ArrayList<Teilnehmer> teilNehmerList;
     private ArrayList<Mitarbeiter> mitarbeiterList;
-    private ArrayList<Module> modulList;
+    private ArrayList<Modul> modulList;
+    private ArrayList<String> rueckmeldungList;
 
-    public Kurs(String kursName, LocalDate startDatum, LocalDate endDatum,
-            ArrayList<Teilnehmer> teilNehmerList, ArrayList<Mitarbeiter> mitarbeiterList,
-            ArrayList<String> rueckmeldungList, ArrayList<Module> modulList) {
+    public Kurs(String kursName, LocalDate startDatum, LocalDate endDatum) {
 
         Period period = Period.between(startDatum, endDatum);
         this.tageAnzahl = period.getDays();
         this.kursName = kursName;
         this.startDatum = startDatum;
         this.endDatum = endDatum;
-        this.teilNehmerList = teilNehmerList;
-        this.mitarbeiterList = mitarbeiterList;
-        this.modulList = modulList;
+        //
+        this.teilNehmerList = new ArrayList<>();
+        this.mitarbeiterList = new ArrayList<>();
+        this.modulList = new ArrayList<>();
+        this.rueckmeldungList = new ArrayList<>();
         this.kursId = this.generateUniqueId();
     }
 
@@ -86,11 +87,11 @@ public class Kurs {
         this.mitarbeiterList = mitarbeiterList;
     }
 
-    public ArrayList<Module> getModulList() {
+    public ArrayList<Modul> getModulList() {
         return modulList;
     }
 
-    public void setModulList(ArrayList<Module> modulList) {
+    public void setModulList(ArrayList<Modul> modulList) {
         this.modulList = modulList;
     }
 
@@ -115,6 +116,22 @@ public class Kurs {
 
         Bewertung bewertung = Bewertung.getByNote(note);
         return bewertung;
+    }
+
+    public void addTeilNehmer(Teilnehmer teilnehmer) {
+        this.teilNehmerList.add(teilnehmer);
+    }
+
+    public void addMitarbeiter(Mitarbeiter mitarbeiter) {
+        this.mitarbeiterList.add(mitarbeiter);
+    }
+
+    public void addModul(Modul modul) {
+        this.modulList.add(modul);
+    }
+
+    public void addRueckmeldungList(String ruckmeldung) {
+        this.rueckmeldungList.add(ruckmeldung);
     }
 
     // print alle Beschreibung von Teilnehmern

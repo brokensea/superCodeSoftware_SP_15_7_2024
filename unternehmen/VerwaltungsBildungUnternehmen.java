@@ -4,6 +4,12 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Map;
+
+import enumKlass.ModulName;
+
+import java.util.List;
+
 import kurs.Modul;
 import kurs.Kurs;
 import kurs.Aufgabe;
@@ -12,18 +18,17 @@ import person.Teilnehmer;
 
 public class VerwaltungsBildungUnternehmen {
     private String unternehmen;
-    private String name;
-    private String chef;
-    private LocalDate begruendungsdatum;
-    private String kategorie;
     private ArrayList<Kurs> kursList;
     private ArrayList<Aufgabe> aufgabenpool;
-
-    ArrayList<Mitarbeiter> mitarbeiterList;
+    private ArrayList<Mitarbeiter> mitarbeiterList;
     private ArrayList<Teilnehmer> teilnehmenList;
 
     // private ArrayList<Aufgabe> aufgabenList;
     // Aufgaben pool
+
+    public VerwaltungsBildungUnternehmen(String unternehmen) {
+        this.unternehmen = unternehmen;
+    }
 
     public int rechnenDurchsnittlichArbeitFindenZeit(Kurs kurs) {
         int durchsnittlichTage;
@@ -49,6 +54,19 @@ public class VerwaltungsBildungUnternehmen {
         return prozent;
     }
 
+    public void addAufgabeZuPool(Aufgabe aufgabe) {
+        this.aufgabenpool.add(aufgabe);
+    }
+
+    // get und set
+    public ArrayList<Aufgabe> getAufgabenpool() {
+        return aufgabenpool;
+    }
+
+    public void setAufgabenpool(ArrayList<Aufgabe> aufgabenpool) {
+        this.aufgabenpool = aufgabenpool;
+    }
+
     public void addKurs(Kurs kurs) {
         kursList.add(kurs);
     }
@@ -63,6 +81,63 @@ public class VerwaltungsBildungUnternehmen {
 
     public void verteilenModul(Mitarbeiter mitarbeiter, Modul modul) {
         mitarbeiter.addModul(modul);
+    }
+
+    public int findPassendAnzahl(Mitarbeiter mitarbeiter, Kurs kurs) {
+        int passendAnzahl = 0;
+        for (int index = 1; index < kurs.getModulList().size(); index++) {
+            Modul kursModul = kurs.getModulList().get(index);
+
+            for (ModulName lizenzen : mitarbeiter.getLizenzenList())
+                if (lizenzen == (kursModul.getModulName())) {
+                    passendAnzahl++;
+                    break;
+                }
+        }
+        return passendAnzahl;
+    }
+
+    public Mitarbeiter findMaxPassendMitarbeiterzuKurs(Kurs kurs) {
+        Mitarbeiter maxPassendMitarbeiter = this.mitarbeiterList.get(0);
+        int maxmalPassend = 0;
+        for (Mitarbeiter mitarbeiter : this.mitarbeiterList) {
+            if (maxmalPassend < this.findPassendAnzahl(mitarbeiter, kurs)) {
+                maxPassendMitarbeiter = mitarbeiter;
+            }
+        }
+        return maxPassendMitarbeiter;
+    }
+
+    public void verteilenMitarbeiterZuKurs(Kurs kurs) {
+        Mitarbeiter maxPassendMitarbeiter = this.findMaxPassendMitarbeiterzuKurs(kurs);
+        kurs.addMitarbeiter(maxPassendMitarbeiter);
+        for (Modul modul : kurs.getModulList()) {
+            for (ModulName lizenzen : maxPassendMitarbeiter.getLizenzenList()) {
+                if (lizenzen == modul.getModulName()) {
+                    maxPassendMitarbeiter.addModul(modul);
+                } else {
+                    System.out.println("Mitabeiter " + maxPassendMitarbeiter + " hat kein Lizenzen von" + modul);
+                }
+            }
+        }
+    }
+
+    public boolean prufenObKursHatZuWeinigAufgabe(Kurs kurs) {
+        int tageVonKurs = kurs.getTageAnzahl();
+        int tageVonAufgabeInsgesamt = 0;
+
+        for (Modul modul : kurs.getModulList()) {
+            for (Aufgabe aufgabe : modul.getAufgabenList()) {
+                tageVonAufgabeInsgesamt += aufgabe.getDauern();
+            }
+        }
+        if (tageVonKurs > tageVonAufgabeInsgesamt) {
+            System.out.println("zu weinig Aufgabe von Kurs: " + kurs.getKursName());
+            return true;
+        } else {
+            System.out.println("ausreichenden Aufgabe von Kurs: " + kurs.getKursName());
+            return false;
+        }
     }
 
     public Mitarbeiter rechnenWeinigestenModul() {
@@ -93,6 +168,16 @@ public class VerwaltungsBildungUnternehmen {
             }
         }
         return minKurs;
+    }
+
+    public boolean addAufgabeZuModul(Aufgabe aufgabe, Modul modul) {
+        if (aufgabe.getModulname() == modul.getModulName()) {
+            modul.addAufgabe(aufgabe);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import enumKlass.ModulName;
-import kurs.Kurs;
 import kurs.Modul;
 
 public class Mitarbeiter extends Person {
@@ -12,15 +11,16 @@ public class Mitarbeiter extends Person {
     private int mitarbeiter_id;
     private static int nextId = 1;
 
-    private ArrayList<Modul> lizenzenList;
+    private ArrayList<ModulName> lizenzenList;
     private ArrayList<Modul> modulList;
 
-    public Mitarbeiter(String vorname, String nachname, String address, ArrayList<Modul> lizenzenList,
-            ArrayList<Modul> modulList) {
+    public Mitarbeiter(String vorname, String nachname, String address) {
         super(vorname, nachname, address);
-        this.setLizenzenList(lizenzenList);
+        // this.setLizenzenList(lizenzenList);
         this.setModulList(modulList);
         this.mitarbeiter_id = this.generateUniqueId();
+        ArrayList<Modul> modulList = new ArrayList<>();
+        ArrayList<ModulName> lizenzenList = new ArrayList<>();
     }
 
     public int getMitarbeiter_id() {
@@ -31,11 +31,11 @@ public class Mitarbeiter extends Person {
         this.mitarbeiter_id = mitarbeiter_id;
     }
 
-    public ArrayList<Modul> getLizenzenList() {
+    public ArrayList<ModulName> getLizenzenList() {
         return lizenzenList;
     }
 
-    public void setLizenzenList(ArrayList<Modul> lizenzenList) {
+    public void setLizenzenList(ArrayList<ModulName> lizenzenList) {
         this.lizenzenList = lizenzenList;
     }
 
@@ -64,6 +64,10 @@ public class Mitarbeiter extends Person {
 
     public void addModul(Modul modul) {
         modulList.add(modul);
+    }
+
+    public void addLizenzen(ModulName modulName) {
+        lizenzenList.add(modulName);
     }
 
     @Override

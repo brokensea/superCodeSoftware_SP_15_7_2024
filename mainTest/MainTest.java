@@ -11,63 +11,84 @@ import enumKlass.*;
 import kurs.*;
 
 public class MainTest {
-
-    // set up AufgabeList
-    // private static Aufgabe aufgabe_1 = new Aufgabe("java OOP Übung", 1);
-    // private static Aufgabe aufgabe_2 = new Aufgabe("java OOP2 Vertiefung", 2);
-    // private static Aufgabe aufgabe_3 = new Aufgabe("java OOP3 Vertiefung", 3);
-    private static ArrayList<Aufgabe> aufgabeList = new ArrayList<>(Arrays.asList(aufgabe_1, aufgabe_2, aufgabe_3));
-
-    // set up ModulList
-    private static Modul java = new Modul(LocalDate.of(2024, 6, 10), LocalDate.of(2024, 7, 30), ModulName.Java,
-            aufgabeList);
-    private static Modul backend = new Modul(LocalDate.of(2024, 7, 10), LocalDate.of(2024, 8, 30), ModulName.Backend,
-            aufgabeList);
-    private static ArrayList<Modul> modulList_java = new ArrayList<>(Arrays.asList(java, backend));
-
-    // set up MitarbeiterList
-    private static Mitarbeiter mitarbeiter_Zana = new Mitarbeiter("Zana", "Zana", "Düsseldorf", modulList_java,
-            modulList_java);
-    private static Mitarbeiter mitarbeiter_Aheimeld = new Mitarbeiter("Aheimeld", "Aheimeld", "Hamburg", modulList_java,
-            modulList_java);
-    private static ArrayList<Mitarbeiter> mitarbeitersList_java = new ArrayList<>(Arrays.asList(mitarbeiter_Zana,
-            mitarbeiter_Aheimeld));
-
-    // Main test
-    public static void main(String[] args) {
-        // personTest();
-
-        // kursTest()
-
-        // unternehmenTest()
-
-        // später
-        // 1. Ein Modul nicht viel Mitabeiter()
-        // hier muss auch machen
-        // 2. Periode muss ohne Wochenend Sam Sonnt
-        // 3. private ArrayList<Aufgabe> aufgabenList; Aufgaben pool in
-        // VerwaltungsBildungUnternehmen
-        // 4. private ModulName aufgabeType; in Aufgabe
-        // wenn aufgabe gleicht Type von Modul dann darf hinzufügen
-        // 5.
-        //
-    }
-
-    public static void personTest() {
-        java.addMitarbeiter(mitarbeiter_Aheimeld);
-        java.addMitarbeiter(mitarbeiter_Zana);
-        System.out.println(java.toString());
-    }
-
-    public static void kursTest() {
-
-    }
-
-    public static void unternehmenTest() {
-
-    }
+    // set up
+    public static VerwaltungsBildungUnternehmen supperCode = new VerwaltungsBildungUnternehmen("supperCode");
 
 }
+
+// private static Aufgabe aufgabe_1 = new Aufgabe("java OOP Übung", 1);
+// private static Aufgabe aufgabe_2 = new Aufgabe("java OOP2 Vertiefung", 2);
+// private static Aufgabe aufgabe_3 = new Aufgabe("java OOP3 Vertiefung", 3);
+// private static ArrayList<Aufgabe> aufgabeList = new
+// ArrayList<>(Arrays.asList(aufgabe_1, aufgabe_2, aufgabe_3));
+
+// // set up ModulList
+// private static Modul java = new Modul(LocalDate.of(2024, 6, 10),
+// LocalDate.of(2024, 7, 30), ModulName.Java,
+// aufgabeList);
+// private static Modul backend = new Modul(LocalDate.of(2024, 7, 10),
+// LocalDate.of(2024, 8, 30), ModulName.Backend,
+// aufgabeList);
+// private static ArrayList<Modul> modulList_java = new
+// ArrayList<>(Arrays.asList(java, backend));
+
+// // set up MitarbeiterList
+// private static Mitarbeiter mitarbeiter_Zana = new Mitarbeiter("Zana", "Zana",
+// "Düsseldorf", modulList_java,
+// modulList_java);
+// private static Mitarbeiter mitarbeiter_Aheimeld = new Mitarbeiter("Aheimeld",
+// "Aheimeld", "Hamburg", modulList_java,
+// modulList_java);
+// private static ArrayList<Mitarbeiter> mitarbeitersList_java = new
+// ArrayList<>(Arrays.asList(mitarbeiter_Zana,
+// mitarbeiter_Aheimeld));
+
+// // Main test
+// public static void main(String[] args) {
+// // personTest();
+
+// // kursTest()
+
+// // unternehmenTest()
+// personTest();
+
+// kursTest()
+
+// unternehmenTest()
+
+// später
+// 1. Ein Modul nicht viel Mitabeiter()
+// hier muss auch machen
+// 2. Periode muss ohne Wochenend Sam Sonnt
+// 3. private ArrayList<Aufgabe> aufgabenList; Aufgaben pool in
+// VerwaltungsBildungUnternehmen
+// 4. private ModulName aufgabeType; in Aufgabe
+// wenn aufgabe gleicht Type von Modul dann darf hinzufügen
+
+// 5. pruefenWinigWechseln bedeutet dass, ein Miterarberit LicensList passend an
+// Kurs Modulist an besten dann
+// 5.1 machen die Miterarbeiter as Trainier von Kurs
+
+// 6. prufen Ob ein Kurst deute z.B 20 tage aber Aufgabe insgesamet 18 Tage,
+// d.h. zu weinigAufgabe
+//
+// }
+
+// public static void personTest() {
+// java.addMitarbeiter(mitarbeiter_Aheimeld);
+// java.addMitarbeiter(mitarbeiter_Zana);
+// System.out.println(java.toString());
+// }
+
+// public static void kursTest() {
+
+// }
+
+// public static void unternehmenTest() {
+
+// }
+
+// }
 // set up Modul list
 // Backend,
 // Frondend,
