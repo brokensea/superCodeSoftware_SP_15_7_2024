@@ -14,14 +14,14 @@ public class Modul {
     private int tageAnzahl;
     private boolean lizenzen;
     private ModulName modulType;
-    private ArrayList<Aufgabe> aufgabenList;
+    private ArrayList<Aufgabe> aufgabenList;//  ohne aufgabenList mit kategorie (wie viel tagen und vie viel aufgaben?)
     private ArrayList<Mitarbeiter> trainierList;
 
 
     public Modul(LocalDate startDatum, LocalDate endDatum, boolean lizenzen,
             ModulName modulType, ArrayList<Aufgabe> aufgabenList, ArrayList<Mitarbeiter> trainierList) {
 
-        Period period = Period.between(startDatum, endDatum);
+        Period period = Period.between(startDatum, endDatum);// period ohne wochenende
         this.tageAnzahl = period.getDays();
         this.startDatum = startDatum;
         this.endDatum = endDatum;

@@ -58,7 +58,6 @@ public class VerwaltungsBildungUnternehmen {
 
     public void verteilenModul (Mitarbeiter mitarbeiter, Modul modul){
         mitarbeiter.addModul(modul);
-
     }
 
 }
