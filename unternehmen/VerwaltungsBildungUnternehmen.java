@@ -56,9 +56,39 @@ public class VerwaltungsBildungUnternehmen {
         teilnehmenList.add(teilnehmer);
     }
 
-    public void verteilenModul (Mitarbeiter mitarbeiter, Modul modul){
+    public void verteilenModul(Mitarbeiter mitarbeiter, Modul modul) {
         mitarbeiter.addModul(modul);
 
+    }
+
+    public Mitarbeiter rechnenWeinigestenModul() {
+        Mitarbeiter weinigestenMitarbeiter = this.mitarbeiterList.get(0);
+        for (Mitarbeiter mitarbeiter : this.mitarbeiterList) {
+            if (weinigestenMitarbeiter.getModulList().size() > mitarbeiter.getModulList().size()) {
+                weinigestenMitarbeiter = mitarbeiter;
+            }
+        }
+        return weinigestenMitarbeiter;
+    }
+
+    public Kurs findenMaxBewertungKurs() {
+        Kurs masxKurs = this.kursList.get(0);
+        for (Kurs kurs : kursList) {
+            if (masxKurs.bewertenRechnen().getNote() < kurs.bewertenRechnen().getNote()) {
+                masxKurs = kurs;
+            }
+        }
+        return masxKurs;
+    }
+
+    public Kurs findenMinBewertungKurs() {
+        Kurs minKurs = this.kursList.get(0);
+        for (Kurs kurs : kursList) {
+            if (minKurs.bewertenRechnen().getNote() > kurs.bewertenRechnen().getNote()) {
+                minKurs = kurs;
+            }
+        }
+        return minKurs;
     }
 
 }

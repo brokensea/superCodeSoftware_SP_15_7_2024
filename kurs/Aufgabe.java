@@ -6,10 +6,9 @@ public class Aufgabe {
     private int aufgabeID;
     private static int nextId;
     private String beschreiben;
-    private LocalDate dauern;
+    private int dauern;
 
-
-    public Aufgabe(String beschreiben, LocalDate dauern) {
+    public Aufgabe(String beschreiben, int dauern) {
         this.aufgabeID = this.generateUniqueId();
         this.beschreiben = beschreiben;
         this.dauern = dauern;
@@ -35,12 +34,20 @@ public class Aufgabe {
         this.beschreiben = beschreiben;
     }
 
-    public LocalDate getDauern() {
+    public int getDauern() {
         return dauern;
     }
 
-    public void setDauern(LocalDate dauern) {
+    public void setDauern(int dauern) {
         this.dauern = dauern;
+    }
+
+    public String toString() {
+        return "Aufgabe{" +
+                "aufgabeID=" + aufgabeID +
+                ", beschreiben='" + beschreiben + '\'' +
+                ", dauern=" + dauern +
+                '}';
     }
 
 }

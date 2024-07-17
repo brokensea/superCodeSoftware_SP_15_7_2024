@@ -96,7 +96,7 @@ public class Kurs {
 
     // Methode:
     // ein Kurs maxmal 8 Teilnehmern
-    private boolean pruefenAnzahlTeilnehmerNichtZuViel() {
+    public boolean pruefenAnzahlTeilnehmerNichtZuViel() {
         if (this.getTeilNehmerList().size() > 8)
             return false;
         else {
@@ -105,7 +105,7 @@ public class Kurs {
     }
 
     // rechnen durchschnittliche Bewerbung von TeilnehmerList ein gut oder .. Note
-    private Bewertung bewertenRechnen() {
+    public Bewertung bewertenRechnen() {
         int note;
         int sum = 0;
         for (Teilnehmer teilnehmer : this.teilNehmerList) {
@@ -118,7 +118,7 @@ public class Kurs {
     }
 
     // print alle Beschreibung von Teilnehmern
-    private void lesenRueckmeidungList() {
+    public void lesenRueckmeidungList() {
         for (Teilnehmer teilnehmer : this.teilNehmerList) {
             System.out.println(teilnehmer.getRueckmeldung());
         }

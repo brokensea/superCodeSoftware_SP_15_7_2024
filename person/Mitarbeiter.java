@@ -54,13 +54,15 @@ public class Mitarbeiter extends Person {
     public boolean istFrei(LocalDate date) {
         for (Modul modul : this.getModulList()) {
             if (date.isAfter(modul.getStartDatum()) && date.isBefore(modul.getEndDatum())) {
+                System.out.println(this.getVorname() + "ist nicht frei");
                 return false;
             }
         }
+        System.out.println(this.getVorname() + "ist frei");
         return true;
     }
 
-    public  void addModul(Modul modul) {
+    public void addModul(Modul modul) {
         modulList.add(modul);
     }
 
@@ -71,8 +73,8 @@ public class Mitarbeiter extends Person {
                 ", vorname='" + getVorname() + '\'' +
                 ", nachname='" + getNachname() + '\'' +
                 ", address='" + getAddress() + '\'' +
-                ", lizenzenList=" + lizenzenList +
-                ", modulList=" + modulList +
+                // ", lizenzenList=" + lizenzenList +
+                // ", modulList=" + modulList +
                 '}';
     }
 }
