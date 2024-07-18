@@ -79,3 +79,7 @@ Ein Enum, das die verschiedenen Bewertungskategorien eines Kurses darstellt (z.B
 ModulName
 
 Ein Enum, das die verschiedenen Modulnamen (z.B. Java, HTML, CSS) darstellt.
+
+Ziel des Projekts:
+
+Das Hauptziel besteht darin, die Prinzipien der objektorientierten Programmierung in Java zu erlernen und anzuwenden. Die Aufgabe ist realistisch und praxisorientiert, und sie bietet Einblicke in die Fun fördert die Zusammenarbeit und Kommunikation, wesentliche Fähigkeiten ktionsweise der Softwareentwicklung in der realen Welt. Die Arbeit im Teamin der Softwareentwicklung. Das Projekt ist anspruchsvoll und ermutigt dazu, die eigenen Fähigkeiten zu erweitern und anzuwenden. Darüber hinaus bietet das Projekt Raum für kreative Lösungen und Eigeninitiative.
