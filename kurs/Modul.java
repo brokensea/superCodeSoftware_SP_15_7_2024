@@ -70,10 +70,6 @@ public class Modul {
         this.aufgabenList = aufgabenList;
     }
 
-    public boolean hasLizenz(Mitarbeiter mitarbeiter) {
-        return mitarbeiter.getLizenzenList().contains(this);
-    }
-
     public void addAufgabe(Aufgabe aufgabe) {
         this.aufgabenList.add(aufgabe);
     }

@@ -9,12 +9,9 @@ public class Aufgabe {
     private static int nextId;
     private String beschreiben;
     private int dauern;
-
     private ModulName modulname;
 
     // private ModulName aufgabeType;
-
-    
 
     public Aufgabe(String beschreiben, int dauern, ModulName modulname) {
         this.aufgabeID = this.generateUniqueId();
