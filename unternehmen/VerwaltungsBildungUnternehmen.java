@@ -34,27 +34,47 @@ public class VerwaltungsBildungUnternehmen {
         this.teilnehmenList = new ArrayList<>();
     }
 
+    // hier auch nicht
     public int rechnenDurchsnittlichArbeitFindenZeit(Kurs kurs) {
         int durchsnittlichTage;
         int sum = 0;
-        for (Teilnehmer teilnehmer : kurs.getTeilNehmerList()) {
-            Duration period = Duration.between(kurs.getEndDatum(), teilnehmer.getArbeitgefundenZeit());
-            sum += period.toDays();
-        }
-        durchsnittlichTage = sum / teilnehmenList.size();
+        int count = 0;
 
+        for (Teilnehmer teilnehmer : kurs.getTeilNehmerList()) {
+            if (teilnehmer.isHatArbeit() && teilnehmer.getArbeitgefundenZeit() != null) {
+                Duration period = Duration.between(kurs.getEndDatum().atStartOfDay(),
+                        teilnehmer.getArbeitgefundenZeit().atStartOfDay());
+                sum += period.toDays();
+                count++;
+            }
+        }
+        if (count == 0) {
+            throw new ArithmeticException(" keine Arbeiter gefunden");
+        }
+        durchsnittlichTage = sum / count;
+
+        System.out.println("durchsnittlich Arbeiterfinden: " + durchsnittlichTage + " Tagen ");
         return durchsnittlichTage;
     }
 
-    public double rechnenPozentArbeitFinden() {
-        double prozent = 0.0;
-        int counter = 0;
-        for (Teilnehmer teilnehmer : teilnehmenList) {
+    // hier muss testen
+    public double rechnenPozentArbeitFinden(Kurs kurs) {
+        int count = 0;
+        int totalTeilnehmer = kurs.getTeilNehmerList().size();
+
+        // double prozent = 0.0;
+        // int counter = 0;
+        if (totalTeilnehmer == 0) {
+            throw new ArithmeticException(" keine Arbeiter gefunden");
+        }
+        for (Teilnehmer teilnehmer : kurs.getTeilNehmerList()) {
             if (teilnehmer.isHatArbeit()) {
-                counter++;
+                count++;
             }
         }
-        prozent = counter / teilnehmenList.size();
+        double prozent = (double) count / totalTeilnehmer * 100;
+        System.out.println(kurs.getKursName() + " hat " + prozent
+                + "% Arbeit gefunden");
         return prozent;
     }
 
@@ -87,6 +107,7 @@ public class VerwaltungsBildungUnternehmen {
         mitarbeiter.addModul(modul);
     }
 
+    // getestet
     public int findPassendAnzahl(Mitarbeiter mitarbeiter, Kurs kurs) {
         int passendAnzahl = 0;
         for (int index = 1; index < kurs.getModulList().size(); index++) {
@@ -101,6 +122,7 @@ public class VerwaltungsBildungUnternehmen {
         return passendAnzahl;
     }
 
+    // getestet
     public Mitarbeiter findMaxPassendMitarbeiterzuKurs(Kurs kurs) {
         Mitarbeiter maxPassendMitarbeiter = this.mitarbeiterList.get(0);
         int maxmalPassend = 0;
@@ -112,6 +134,7 @@ public class VerwaltungsBildungUnternehmen {
         return maxPassendMitarbeiter;
     }
 
+    // getestet
     public void verteilenMitarbeiterZuKurs(Kurs kurs) {
         Mitarbeiter maxPassendMitarbeiter = this.findMaxPassendMitarbeiterzuKurs(kurs);
         kurs.addMitarbeiter(maxPassendMitarbeiter);
@@ -128,6 +151,7 @@ public class VerwaltungsBildungUnternehmen {
         }
     }
 
+    // getestet
     public boolean prufenObKursHatZuWeinigAufgabe(Kurs kurs) {
         int tageVonKurs = kurs.getTageAnzahl();
         int tageVonAufgabeInsgesamt = 0;
@@ -146,6 +170,7 @@ public class VerwaltungsBildungUnternehmen {
         }
     }
 
+    // getestet
     public Mitarbeiter rechnenWeinigestenModul() {
         Mitarbeiter weinigestenMitarbeiter = this.mitarbeiterList.get(0);
         for (Mitarbeiter mitarbeiter : this.mitarbeiterList) {
@@ -156,6 +181,7 @@ public class VerwaltungsBildungUnternehmen {
         return weinigestenMitarbeiter;
     }
 
+    // getestet
     public Kurs findenMaxBewertungKurs() {
         Kurs masxKurs = this.kursList.get(0);
         for (Kurs kurs : kursList) {
@@ -166,6 +192,7 @@ public class VerwaltungsBildungUnternehmen {
         return masxKurs;
     }
 
+    // gestestet
     public Kurs findenMinBewertungKurs() {
         Kurs minKurs = this.kursList.get(0);
         for (Kurs kurs : kursList) {
@@ -176,6 +203,7 @@ public class VerwaltungsBildungUnternehmen {
         return minKurs;
     }
 
+    // ? ob notwendig
     public boolean addAufgabeZuModul(Aufgabe aufgabe, Modul modul) {
         if (aufgabe.getModulname() == modul.getModulName()) {
             modul.addAufgabe(aufgabe);

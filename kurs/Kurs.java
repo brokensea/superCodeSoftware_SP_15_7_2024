@@ -121,8 +121,14 @@ public class Kurs {
     }
 
     // prufen ob mehr als 8
-    public boolean pruefenAnzahlTeilnehmerNichtZuViel() {
-        return this.getTeilNehmerList().size() <= 8;
+    public boolean pruefenAnzahlTeilnehmerZuViel() {
+        if (this.getTeilNehmerList().size() <= 8) {
+            return false;
+        } else {
+            System.out.println(this.kursName + " hat zu viel Teilnehmer meher als 8");
+            return true;
+        }
+
     }
 
     // Bewertung von Kurs rechnen
@@ -142,7 +148,12 @@ public class Kurs {
 
     // add TeilNehmer zu Kurs
     public void addTeilNehmer(Teilnehmer teilnehmer) {
-        this.teilNehmerList.add(teilnehmer);
+        if (!this.pruefenAnzahlTeilnehmerZuViel()) {
+            this.teilNehmerList.add(teilnehmer);
+        } else {
+            throw new IllegalArgumentException(this.kursName + " hat zu viel Teilnehmer meher als 8");
+        }
+
     }
 
     // add Mitarbeiter zu Kurs

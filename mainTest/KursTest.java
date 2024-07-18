@@ -30,5 +30,16 @@ public class KursTest {
         kurs.addTeilNehmer(teilnehmer2);
 
         System.out.println("Durchschnittliche Bewertung des Kurses: " + kurs.bewertenRechnen());
+
+        // Test: pruefenAnzahlTeilnehmerNichtZuViel()
+        kurs.addTeilNehmer(teilnehmer1);
+        kurs.addTeilNehmer(teilnehmer2);
+        kurs.addTeilNehmer(teilnehmer1);
+        kurs.addTeilNehmer(teilnehmer2);
+        kurs.addTeilNehmer(teilnehmer1);
+        kurs.addTeilNehmer(teilnehmer2);
+        kurs.addTeilNehmer(teilnehmer1);
+        kurs.pruefenAnzahlTeilnehmerZuViel();
+
     }
 }
