@@ -4,6 +4,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 
 import enumKlass.ModulName;
@@ -21,6 +24,7 @@ public class VerwaltungsBildungUnternehmen {
     private ArrayList<Kurs> kursList;
     private ArrayList<Aufgabe> aufgabenpool;
     private ArrayList<Mitarbeiter> mitarbeiterList;
+
     private ArrayList<Teilnehmer> teilnehmenList;
 
     // private ArrayList<Aufgabe> aufgabenList;
@@ -107,6 +111,10 @@ public class VerwaltungsBildungUnternehmen {
         mitarbeiter.addModul(modul);
     }
 
+    public ArrayList<Mitarbeiter> getMitarbeiterList() {
+        return mitarbeiterList;
+    }
+
     // getestet
     public int findPassendAnzahl(Mitarbeiter mitarbeiter, Kurs kurs) {
         int passendAnzahl = 0;
@@ -136,16 +144,38 @@ public class VerwaltungsBildungUnternehmen {
 
     // getestet
     public void verteilenMitarbeiterZuKurs(Kurs kurs) {
-        Mitarbeiter maxPassendMitarbeiter = this.findMaxPassendMitarbeiterzuKurs(kurs);
-        kurs.addMitarbeiter(maxPassendMitarbeiter);
+        if (pruefenObAllModulInKursHatMitarbeiter(kurs)) {
+            while (gibtEsUnbesetzteModule(kurs)) {
+                verteilenMitarbeiterZuKursHilfe(kurs);
+            }
+        } else {
+            System.out.println("MitarbeiterPool nicht genug.");
+        }
+    }
+
+    public boolean gibtEsUnbesetzteModule(Kurs kurs) {
         for (Modul modul : kurs.getModulList()) {
-            for (ModulName lizenzen : maxPassendMitarbeiter.getLizenzenList()) {
-                if (lizenzen == modul.getModulName()) {
+            if (!modul.hasMitarbeiter()) {
+                return true;
+            }
+        }
+        System.out.println("All Modul in Kurs " + kurs.getKursName() + " hat Mitarbeiter Kurs vollständig");
+        return false;
+    }
+
+    public void verteilenMitarbeiterZuKursHilfe(Kurs kurs) {
+        this.sortierenMitarbeiterListnachMitarbeiterModulistTagen();
+        for (Modul modul : kurs.getModulList()) {
+            if (!modul.hasMitarbeiter()) {
+                Mitarbeiter maxPassendMitarbeiter = this.findMaxPassendMitarbeiterzuKurs(kurs);
+                if (maxPassendMitarbeiter != null) {
+                    kurs.addMitarbeiter(maxPassendMitarbeiter);
                     maxPassendMitarbeiter.addModul(modul);
+                    modul.setMitarbeiter(maxPassendMitarbeiter);
+                    System.out.println("Mitarbeiter " + maxPassendMitarbeiter.getVorname() + " wurde zum Modul "
+                            + modul.getModulName() + " hinzugefügt.");
                 } else {
-                    System.out.println(
-                            "Mitabeiter " + maxPassendMitarbeiter.getVorname() + " hat kein Lizenzen von: "
-                                    + modul.getModulName());
+                    System.out.println("Kein passender Mitarbeiter für Modul " + modul.getModulName() + " gefunden.");
                 }
             }
         }
@@ -212,6 +242,37 @@ public class VerwaltungsBildungUnternehmen {
             return false;
         }
 
+    }
+
+    // sortieren MitarbeiterList nach Mitarbeiter Modulist Tagen insgesamt
+    public void sortierenMitarbeiterListnachMitarbeiterModulistTagen() {
+        Collections.sort(mitarbeiterList, new Comparator<Mitarbeiter>() {
+            @Override
+            public int compare(Mitarbeiter mitarbeiter1, Mitarbeiter mitarbeiter2) {
+                return Integer.compare(mitarbeiter1.getMitarbetierModulTagen(),
+                        mitarbeiter2.getMitarbetierModulTagen());
+            }
+
+        });
+    }
+
+    public boolean pruefenObAllModulInKursHatMitarbeiter(Kurs kurs) {
+        for (Modul modul : kurs.getModulList()) {
+            boolean hatMitarbeiter = false;
+            for (Mitarbeiter mitarbeiter : this.mitarbeiterList) {
+                if (mitarbeiter.getLizenzenList().contains(modul.getModulName())
+                        && mitarbeiter.istFrei(modul.getStartDatum())) {
+                    hatMitarbeiter = true;
+                    break;
+                }
+            }
+            if (!hatMitarbeiter) {
+                System.out.println("Nicht Genue Mitarbeiter für Modul " + modul.getModulName());
+                return false;
+            }
+
+        }
+        return true;
     }
 
 }

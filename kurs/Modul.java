@@ -16,7 +16,7 @@ public class Modul {
     private int tageAnzahl;
     private ModulName modulName;
     private ArrayList<Aufgabe> aufgabenList;
-    private Mitarbeiter trainier;
+    private Mitarbeiter mitarbeiter;
 
     public Modul(LocalDate startDatum, LocalDate endDatum,
             ModulName modulName, ArrayList<Aufgabe> aufgabenList) {
@@ -27,7 +27,7 @@ public class Modul {
         this.endDatum = endDatum;
         this.modulName = modulName;
         this.aufgabenList = aufgabenList;
-        // this.trainierList = trainierList;
+        // this.mitarbeiterList = mitarbeiterList;
     }
 
     public ModulName getModulName() {
@@ -74,10 +74,21 @@ public class Modul {
         this.aufgabenList.add(aufgabe);
     }
 
-    public void addMitarbeiter(Mitarbeiter mitarbeiter) {
-        this.trainier = mitarbeiter;
+    public void setMitarbeiter(Mitarbeiter mitarbeiter) {
+        this.mitarbeiter = mitarbeiter;
     }
+
+    public Mitarbeiter getMitarbeiter() {
+        return mitarbeiter;
+    }
+
     // Method
+    public boolean hasMitarbeiter() {
+        if (this.mitarbeiter == null) {
+            return false;
+        } else
+            return true;
+    }
 
     public Aufgabe pruefenTagMindsterAufgabe() {
         Aufgabe minTagAufgabe = this.aufgabenList.get(0);
@@ -122,7 +133,7 @@ public class Modul {
                 ", tageAnzahl=" + tageAnzahl +
                 ", modulType=" + modulName +
                 ", aufgabenList=" + aufgabenList +
-                ", trainier=" + trainier +
+                ", mitarbeiter=" + mitarbeiter +
                 '}';
     }
 }

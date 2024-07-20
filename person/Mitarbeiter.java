@@ -58,6 +58,15 @@ public class Mitarbeiter extends Person {
         return nextId++;
     }
 
+    // get Mitarbeiter Modulist Tagen insgesamt
+    public int getMitarbetierModulTagen() {
+        int tageAnzahl = 0;
+        for (Modul modul : this.modulList) {
+            tageAnzahl += modul.getTageAnzahl();
+        }
+        return tageAnzahl;
+    }
+
     // prufen ob Mitarbeiter frei
     public boolean istFrei(LocalDate date) {
         for (Modul modul : this.getModulList()) {
